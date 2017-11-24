@@ -258,7 +258,10 @@ def commit_and_push():
     subprocess.check_output(['git', 'commit', '-m', 'script update'])
     subprocess.check_output(['git', 'push'])
     subprocess.check_output(
-        ['git', 'subtree', 'push', '--prefix', 'dist', 'origin', 'gh-pages'])
+        ['git', 'subtree', 'split', '--prefix', 'dist', '-b', 'gh-pages'])
+    subprocess.check_output(
+        ['git', 'push', '-f', 'origin', 'gh-pages:gh-pages'])
+    subprocess.check_output(['git', 'branch', '-D', 'gh-pages'])
 
 
 def cli_runner():
