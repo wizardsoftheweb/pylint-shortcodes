@@ -153,7 +153,11 @@ def parse_raw_shortcodes(version_number, raw_shortcodes):  # pylint: disable=unu
     for shortcode_match in re.finditer(SHORTCODE_PATTERN, raw_shortcodes):
         shortcode = type('', (), {})()
         for key in ['wordy', 'number', 'message', 'details']:
-            setattr(shortcode, key, shortcode_match.group(key))
+            setattr(
+                shortcode,
+                key,
+                re.sub(r'\s+', ' ', shortcode_match.group(key))
+            )
         list_of_shortcodes.append(shortcode)
     return list_of_shortcodes
 
