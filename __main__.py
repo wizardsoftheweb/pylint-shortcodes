@@ -7,6 +7,7 @@ from StringIO import StringIO
 
 import os
 import re
+import shutil
 import subprocess
 import sys
 
@@ -21,11 +22,11 @@ ROOT_DIR = os.path.join(
 VIRTUALENV_DIR = os.path.join(ROOT_DIR, '.venv')
 WORKING_FILES_DIR = os.path.join(ROOT_DIR, 'raw')
 if os.path.isdir(WORKING_FILES_DIR):
-    os.removedirs(WORKING_FILES_DIR)
+    shutil.rmtree(WORKING_FILES_DIR)
 os.makedirs(WORKING_FILES_DIR)
 VERSION_FILES_DIR = os.path.join(ROOT_DIR, 'dist', 'versions')
 if os.path.isdir(VERSION_FILES_DIR):
-    os.removedirs(VERSION_FILES_DIR)
+    shutil.rmtree(VERSION_FILES_DIR)
 os.makedirs(VERSION_FILES_DIR)
 TEMPLATE_DIR = os.path.join(ROOT_DIR, 'templates')
 
@@ -232,7 +233,7 @@ def commit_and_push():
 
 def clean_up():
     """Removes script working files"""
-    os.removedirs(VIRTUALENV_DIR)
+    shutil.rmtree(VIRTUALENV_DIR)
 
 
 def cli_runner():
