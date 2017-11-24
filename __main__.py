@@ -11,6 +11,7 @@ import shutil
 import subprocess
 import sys
 
+import htmlmin
 from jinja2 import Environment, FileSystemLoader
 import pip
 import virtualenv
