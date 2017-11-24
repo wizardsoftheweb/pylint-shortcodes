@@ -147,21 +147,14 @@ def get_version_shortcodes(version_number):
     return shortcodes
 
 
-def parse_raw_shortcodes(version_number, raw_shortcodes):
+def parse_raw_shortcodes(version_number, raw_shortcodes):  # pylint: disable=unused-argument
     """Parses the full list of shortcodes"""
     list_of_shortcodes = list()
-    with open(
-        convert_version_number_to_raw_filename(version_number) + '_shortcodes',
-        'w+'
-    ) as parsed_shortcodes_file:
-        for shortcode_match in re.finditer(SHORTCODE_PATTERN, raw_shortcodes):
-            shortcode = type('', (), {})()
-            for key in ['wordy', 'number', 'message', 'details']:
-                setattr(shortcode, key, shortcode_match.group(key))
-            list_of_shortcodes.append(shortcode)
-            parsed_shortcodes_file.write(
-                ' '.join(shortcode.__dict__.values())
-            )
+    for shortcode_match in re.finditer(SHORTCODE_PATTERN, raw_shortcodes):
+        shortcode = type('', (), {})()
+        for key in ['wordy', 'number', 'message', 'details']:
+            setattr(shortcode, key, shortcode_match.group(key))
+        list_of_shortcodes.append(shortcode)
     return list_of_shortcodes
 
 
@@ -243,6 +236,8 @@ def cli_runner():
     for version_number in version_numbers:
         parse_a_version(version_number)
     compile_index_template(version_numbers)
+    commit_and_push()
+    clean_up()
 
 
 cli_runner()
