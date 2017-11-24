@@ -1,19 +1,19 @@
 # pylint: disable=invalid-name
+# pylint: disable=misplaced-comparison-constant
+# pylint: disable=wrong-import-position
 """
 This file provides a procedural script to generate shortcodes for all available
 versions of pylint
 """
-from StringIO import StringIO
 
 import os
 import re
 import shutil
 import subprocess
-import sys
+import time
 
 import htmlmin
 from jinja2 import Environment, FileSystemLoader
-import pip
 import virtualenv
 
 ROOT_DIR = os.path.join(
@@ -21,6 +21,18 @@ ROOT_DIR = os.path.join(
     os.path.dirname(__file__)
 )
 VIRTUALENV_DIR = os.path.join(ROOT_DIR, '.venv')
+
+virtualenv.create_environment(VIRTUALENV_DIR)
+if 'nt' == os.name:
+    activate_path = os.path.join(VIRTUALENV_DIR, "Scripts", "activate_this.py")
+else:
+    activate_path = os.path.join(VIRTUALENV_DIR, "bin", "activate_this.py")
+execfile(activate_path, dict(__file__=activate_path))
+
+PIP_PATH = os.path.join(VIRTUALENV_DIR, 'bin', 'pip')
+PYLINT_PATH = os.path.join(VIRTUALENV_DIR, 'bin', 'pylint')
+
+VERSION_NUMBER_LIST = os.path.join(ROOT_DIR, 'version_numbers')
 WORKING_FILES_DIR = os.path.join(ROOT_DIR, 'raw')
 if os.path.isdir(WORKING_FILES_DIR):
     shutil.rmtree(WORKING_FILES_DIR)
@@ -30,11 +42,9 @@ if os.path.isdir(VERSION_FILES_DIR):
     shutil.rmtree(VERSION_FILES_DIR)
 os.makedirs(VERSION_FILES_DIR)
 TEMPLATE_DIR = os.path.join(ROOT_DIR, 'templates')
-
 JINJA_ENV = Environment(
     loader=FileSystemLoader(TEMPLATE_DIR)
 )
-
 SHORTCODE_PATTERN = re.compile(r'''
 \s*                 # include potential initial space
 \:                  # begins with a colon
@@ -63,69 +73,90 @@ SHORTCODE_PATTERN = re.compile(r'''
 )
 \s+                 # include final space
 ''', re.VERBOSE)
+MAX_VERSION_LIST_AGE = 60 * 60 * 24 * 7
+MAX_SHORTCODE_FILE_AGE = 60 * 60 * 24 * 7 * 30
 
 
-def initialize_virtualenv():
-    """Creates and activates a new virtualenv"""
-    virtualenv.create_environment(VIRTUALENV_DIR)
-    execfile(os.path.join(VIRTUALENV_DIR, "bin", "activate_this.py"))
+def get_cached_version_numbers():
+    """Loads the version_numbers cache file"""
+    with open(VERSION_NUMBER_LIST, 'r+') as cache_file:
+        version_numbers = cache_file.read().strip().split('\n')
+    return version_numbers
 
 
-def list_pylint_versions():
+def check_list_cache_age():
+    """Checks the age of the included version list"""
+    try:
+        assert (
+            os.path.getmtime(VERSION_NUMBER_LIST)
+            >=
+            (int(time.time()) - MAX_VERSION_LIST_AGE)
+        )
+    except (AssertionError, OSError):
+        return get_fresh_version_numbers()
+    else:
+        return get_cached_version_numbers()
+
+
+def get_fresh_version_numbers():
     """Gets a full list of pylint versions"""
     print 'Installing base pylint to get version list'
-    install_buffer = StringIO()
-    sys.stdout = install_buffer
-    pip.main(
+    version_results = subprocess.check_output(
         [
+            PIP_PATH,
             'install',
-            '--prefix',
-            VIRTUALENV_DIR,
-            '--no-deps',
-            '--ignore-installed',
-            'pylint',
-            '-v'
+            '--upgrade',
+            '-v',
+            'pylint'
         ]
     )
-    sys.stdout = sys.__stdout__
-    install_log = install_buffer.getvalue()
     print 'Finished installing; parsing log'
     version_numbers = list()
     for version_line_match in re.finditer(
             r'^\s*Using.+?versions:(?P<version_list>.+)\)$',
-            install_log, re.MULTILINE
+            version_results, re.MULTILINE
     ):
         for version_number_match in re.finditer(
                 r'(?P<full_semver>(\d+\.?)+)',
                 version_line_match.group('version_list')
         ):
-            version_numbers.append(version_number_match.group('full_semver'))
-    print "Finished parsing; discovered these versions: %s" % (' ,'.join(version_numbers))
+            version_numbers.append(
+                version_number_match.group('full_semver')
+            )
+    version_numbers = sorted(set(version_numbers))[::-1]
+    with open(VERSION_NUMBER_LIST, 'w+') as cache_file:
+        for version_number in version_numbers:
+            cache_file.write(version_number + '\n')
+    print "Finished parsing; discovered these versions: %s" % (', '.join(version_numbers))
+    # remove_pylint()
     return version_numbers
 
 
 def install_specific_pylint_version(version_number):
     """Installs a specific version of pylint"""
-    print 'Installing pylint==%s' % (version_number)
-    pip.main(
+    print "Installing pylint==%s" % (version_number)
+    # print ' '.join([
+    #     PIP_PATH,
+    #     'install',
+    #     '--quiet',
+    #     "pylint==%s" % (version_number)
+    # ])
+    print subprocess.check_output(
         [
+            PIP_PATH,
             'install',
-            '--prefix',
-            VIRTUALENV_DIR,
-            '--no-deps',
-            '--ignore-installed',
-            "pylint==%s" % (version_number),
-            '--quiet'
+            '--quiet',
+            "pylint==%s" % (version_number)
         ]
     )
-    print 'Finished installing'
+    print "Finished installing %s" % (version_number)
 
 
 def convert_version_number_to_raw_filename(version_number):
     """Simplifies finding a version number's raw output"""
     return os.path.join(
         WORKING_FILES_DIR,
-        ('raw_%s.txt' % (version_number.replace('.', '_')))
+        ("raw_%s.txt" % (version_number.replace('.', '_')))
     )
 
 
@@ -133,7 +164,7 @@ def get_version_shortcodes(version_number):
     """Attempts to run the --list-msgs command"""
     print "Attempting to find shortcodes for %s" % (version_number)
     try:
-        shortcodes = subprocess.check_output(['pylint', '--list-msgs'])
+        shortcodes = subprocess.check_output([PYLINT_PATH, '--list-msgs'])
     except subprocess.CalledProcessError:
         print(
             'ERROR: pylint --list-msgs raised an error; '
@@ -190,16 +221,17 @@ def compile_version_template(version_number, shortcodes):
         version_number=version_number,
         shortcodes=shortcodes
     )
+    minified = htmlmin.minify(rendered_template)
     with open(
         convert_version_number_to_out_filename(version_number),
         'w+'
     ) as final_page:
-        final_page.write(rendered_template)
+        final_page.write(minified)
 
 
 def parse_a_version(version_number):
     """Runs all the necessary methods for a specific version number"""
-    print 'Parsing version %s' % (version_number)
+    print "Parsing version %s" % (version_number)
     install_specific_pylint_version(version_number)
     raw_shortcodes = get_version_shortcodes(version_number)
     # cleaned_shortcodes = parse_shortcodes_from_working_files(version_number)
@@ -229,20 +261,13 @@ def commit_and_push():
         ['git', 'subtree', 'push', '--prefix', 'dist', 'origin', 'gh-pages'])
 
 
-def clean_up():
-    """Removes script working files"""
-    shutil.rmtree(VIRTUALENV_DIR)
-
-
 def cli_runner():
     """Runs the functions in the proper order"""
-    initialize_virtualenv()
-    version_numbers = list_pylint_versions()
+    version_numbers = get_fresh_version_numbers()
     for version_number in version_numbers:
         parse_a_version(version_number)
     compile_index_template(version_numbers)
     commit_and_push()
-    clean_up()
 
 
 cli_runner()
