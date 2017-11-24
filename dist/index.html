@@ -1,8 +1,759 @@
 <html>
+
 <head>
-    <title>Test file please ignore</title>
+    <title>pylint-shortcodes | wizardsoftheweb</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/jq-3.2.1/dt-1.10.16/datatables.min.css" />
+    <style type="text/css">
+        .tbody :nth-child(even) {
+            background-color: #ccc;
+        }
+    </style>
 </head>
+
 <body>
-    I'm sad that I'm flying.
+    <main>
+        <article class="container">
+            <header class="row">
+                <h1 class="col-md-12"><code>pylint-shortcodes</code></h1>
+                <p class="col-md-12">I got really tired of constantly Googling <code>pylint</code> codes. <code>pylint --list-msgs | grep</code> wasn't much faster. All I wanted to do was find a quick, easily searchable reference with all the error codes and their more descriptive names.</p>
+                <p class="col-md-12">Using the modules for <code>virtualenv</code> and <code>pip</code>, I programmatically installed every possible version of <code>pylint</code>. I then ran <code>pylint --list-msgs</code> and parsed the output, sending it to templates via <code>jinja2</code>. The pages are formatted via BootStrap, jQuery, and DataTables. I included a link to PyLint Messages, the website I used the most trying to find a quick reference.</p>
+                <p class="col-md-12">I slapped this together in a couple of hours. Calling the source a train wreck is an insult to trains everywhere. I might touch this later, but I might not. There's probably a better way to do this natively in Python, and there's most definitely a more elegant way to do it.</p>
+                <p class="col-md-12">Useful links:</p>
+                <div class="col-md-12">
+                    <ul>
+                        <li><a target="_blank" href="https://github.com/pypa/virtualenv"><code>virtualenv</code></a></li>
+                        <li><a target="_blank" href="https://github.com/pypa/pip"><code>pip</code></a></li>
+                        <li><a target="_blank" href="https://github.com/pallets/jinja"><code>jinja2</code></a></li>
+                        <li><a target="_blank" href="https://github.com/twbs/bootstrap">BootStrap</a></li>
+                        <li><a target="_blank" href="https://github.com/jquery/jquery">jQuery</a></li>
+                        <li><a target="_blank" href="https://github.com/DataTables/DataTables">DataTables</a></li>
+                        <li><a target="_blank" href="https://pylint-messages.wikidot.com/start">PyLint Messages</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section class="row">
+                <table class="col-md-12 table-hover display" id="full-table">
+                    
+                    <thead>
+                        <tr>
+                            <th>Link</th>
+                            <th>Major</th>
+                            <th>Minor</th>
+                            <th>Patch</th>
+                        </tr>
+                    </thead>
+                    
+                    <tfoot>
+                        <tr>
+                            <th>Link</th>
+                            <th>Major</th>
+                            <th>Minor</th>
+                            <th>Patch</th>
+                        </tr>
+                    </tfoot>
+                    
+                    <tbody>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_15_2.html">v0.15.2
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>15</td>
+                            
+                            <td>2</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_16_0.html">v0.16.0
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>16</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_18_0.html">v0.18.0
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>18</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_18_1.html">v0.18.1
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>18</td>
+                            
+                            <td>1</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_19_0.html">v0.19.0
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>19</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_20_0.html">v0.20.0
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>20</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_21_0.html">v0.21.0
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>21</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_21_1.html">v0.21.1
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>21</td>
+                            
+                            <td>1</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_21_2.html">v0.21.2
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>21</td>
+                            
+                            <td>2</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_21_3.html">v0.21.3
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>21</td>
+                            
+                            <td>3</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_22_0.html">v0.22.0
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>22</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_23_0.html">v0.23.0
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>23</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_24_0.html">v0.24.0
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>24</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_25_0.html">v0.25.0
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>25</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_25_1.html">v0.25.1
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>25</td>
+                            
+                            <td>1</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_25_2.html">v0.25.2
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>25</td>
+                            
+                            <td>2</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_26_0.html">v0.26.0
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>26</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_27_0.html">v0.27.0
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>27</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/0_28_0.html">v0.28.0
+                                </a>
+                            </td>
+                            
+                            <td>0</td>
+                            
+                            <td>28</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_0_0.html">v1.0.0
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>0</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_1_0.html">v1.1.0
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>1</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_2_0.html">v1.2.0
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>2</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_2_1.html">v1.2.1
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>2</td>
+                            
+                            <td>1</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_3_0.html">v1.3.0
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>3</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_3_1.html">v1.3.1
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>3</td>
+                            
+                            <td>1</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_4_0.html">v1.4.0
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>4</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_4_1.html">v1.4.1
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>4</td>
+                            
+                            <td>1</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_4_2.html">v1.4.2
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>4</td>
+                            
+                            <td>2</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_4_3.html">v1.4.3
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>4</td>
+                            
+                            <td>3</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_4_4.html">v1.4.4
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>4</td>
+                            
+                            <td>4</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_4_5.html">v1.4.5
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>4</td>
+                            
+                            <td>5</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_5_0.html">v1.5.0
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>5</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_5_1.html">v1.5.1
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>5</td>
+                            
+                            <td>1</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_5_2.html">v1.5.2
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>5</td>
+                            
+                            <td>2</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_5_3.html">v1.5.3
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>5</td>
+                            
+                            <td>3</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_5_4.html">v1.5.4
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>5</td>
+                            
+                            <td>4</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_5_5.html">v1.5.5
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>5</td>
+                            
+                            <td>5</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_5_6.html">v1.5.6
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>5</td>
+                            
+                            <td>6</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_6_0.html">v1.6.0
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>6</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_6_1.html">v1.6.1
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>6</td>
+                            
+                            <td>1</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_6_2.html">v1.6.2
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>6</td>
+                            
+                            <td>2</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_6_3.html">v1.6.3
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>6</td>
+                            
+                            <td>3</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_6_4.html">v1.6.4
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>6</td>
+                            
+                            <td>4</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_6_5.html">v1.6.5
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>6</td>
+                            
+                            <td>5</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_7_0.html">v1.7.0
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>7</td>
+                            
+                            <td>0</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_7_1.html">v1.7.1
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>7</td>
+                            
+                            <td>1</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_7_2.html">v1.7.2
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>7</td>
+                            
+                            <td>2</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_7_3.html">v1.7.3
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>7</td>
+                            
+                            <td>3</td>
+                            
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/1_7_4.html">v1.7.4
+                                </a>
+                            </td>
+                            
+                            <td>1</td>
+                            
+                            <td>7</td>
+                            
+                            <td>4</td>
+                            
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </section>
+        </article>
+    </main>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#full-table').dataTable({
+            "pageLength": 50
+        });
+    })
+
+    </script>
 </body>
+
 </html>
