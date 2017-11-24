@@ -3,11 +3,6 @@
 <head>
     <title>pylint-shortcodes | wizardsoftheweb</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/jq-3.2.1/dt-1.10.16/datatables.min.css" />
-    <style type="text/css">
-        .tbody :nth-child(even) {
-            background-color: #ccc;
-        }
-    </style>
 </head>
 
 <body>
@@ -32,31 +27,35 @@
                 </div>
             </header>
             <section class="row">
-                <table class="col-md-12 table-hover display" id="full-table">
-                    {% for placement in ['thead', 'tfoot'] %}
-                    <{{ placement }}>
-                        <tr>
-                            <th>Link</th>
-                            <th>Major</th>
-                            <th>Minor</th>
-                            <th>Patch</th>
-                        </tr>
-                    </{{ placement }}>
-                    {% endfor %}
-                    <tbody>
-                        {% for version in version_numbers %}
-                        <tr>
-                            <td>
-                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/{{ version|replace('.', '_') }}.html">v{{ version }}
-                                </a>
-                            </td>
-                            {% for semver_chunk in version.split('.') %}
-                            <td>{{ semver_chunk }}</td>
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="col-md-12 table-hover display" id="full-table">
+                            {% for placement in ['thead', 'tfoot'] %}
+                            <{{ placement }}>
+                                <tr>
+                                    <th>Link</th>
+                                    <th>Major</th>
+                                    <th>Minor</th>
+                                    <th>Patch</th>
+                                </tr>
+                            </{{ placement }}>
                             {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                            <tbody>
+                                {% for version in version_numbers %}
+                                <tr>
+                                    <td>
+                                        <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/{{ version|replace('.', '_') }}.html">v{{ version }}
+                                        </a>
+                                    </td>
+                                    {% for semver_chunk in version.split('.') %}
+                                    <td>{{ semver_chunk }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </section>
         </article>
     </main>

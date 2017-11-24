@@ -3,11 +3,6 @@
 <head>
     <title>PyLint Messages v{{ version_number }}</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/jq-3.2.1/dt-1.10.16/datatables.min.css" />
-    <style type="text/css">
-        .tbody :nth-child(even) {
-            background-color: #ccc;
-        }
-    </style>
 </head>
 
 <body>
@@ -18,30 +13,34 @@
                 <p class="col-md-12">This file was automatically generated. Check out <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/"><code>pylint-shortcodes</code>'s main page</a> for more information.</p>
             </header>
             <section class="row">
-                <table class="col-md-12 table-hover display" id="full-table">
-                    {% for placement in ['thead', 'tfoot'] %}
-                    <{{ placement }}>
-                        <tr>
-                            <th>Shortcode</th>
-                            <th>Number</th>
-                            <th>Message</th>
-                            <th>PyLint Messages Link</th>
-                            <th>Details</th>
-                        </tr>
-                    </{{ placement }}>
-                    {% endfor %}
-                    <tbody>
-                        {% for shortcode in shortcodes %}
-                        <tr>
-                            <td><code>{{ shortcode.wordy }}</code></td>
-                            <td>{{ shortcode.number|upper }}</td>
-                            <td><code>{{ shortcode.message }}</code></td>
-                            <td><a target="_blank" href="http://pylint-messages.wikidot.com/messages:{{ shortcode.number|lower }}">{{ shortcode.wordy }}</a></td>
-                            <td>{{ shortcode.details }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="col-md-12 table-striped display" id="full-table">
+                            {% for placement in ['thead', 'tfoot'] %}
+                            <{{ placement }}>
+                                <tr>
+                                    <th>Shortcode</th>
+                                    <th>Number</th>
+                                    <th>Message</th>
+                                    <th>PyLint Messages Link</th>
+                                    <th>Details</th>
+                                </tr>
+                            </{{ placement }}>
+                            {% endfor %}
+                            <tbody>
+                                {% for shortcode in shortcodes %}
+                                <tr>
+                                    <td><code>{{ shortcode.wordy }}</code></td>
+                                    <td>{{ shortcode.number|upper }}</td>
+                                    <td><code>{{ shortcode.message }}</code></td>
+                                    <td><a target="_blank" href="http://pylint-messages.wikidot.com/messages:{{ shortcode.number|lower }}">{{ shortcode.wordy }}</a></td>
+                                    <td>{{ shortcode.details }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </section>
         </article>
     </main>
