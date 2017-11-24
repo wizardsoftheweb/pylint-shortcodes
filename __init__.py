@@ -20,11 +20,13 @@ ROOT_DIR = os.path.join(
 )
 VIRTUALENV_DIR = os.path.join(ROOT_DIR, '.venv')
 WORKING_FILES_DIR = os.path.join(ROOT_DIR, 'raw')
-if not os.path.isdir(WORKING_FILES_DIR):
-    os.makedirs(WORKING_FILES_DIR)
+if os.path.isdir(WORKING_FILES_DIR):
+    os.removedirs(WORKING_FILES_DIR)
+os.makedirs(WORKING_FILES_DIR)
 VERSION_FILES_DIR = os.path.join(ROOT_DIR, 'dist', 'versions')
-if not os.path.isdir(VERSION_FILES_DIR):
-    os.makedirs(VERSION_FILES_DIR)
+if os.path.isdir(VERSION_FILES_DIR):
+    os.removedirs(VERSION_FILES_DIR)
+os.makedirs(VERSION_FILES_DIR)
 TEMPLATE_DIR = os.path.join(ROOT_DIR, 'templates')
 
 JINJA_ENV = Environment(
@@ -221,7 +223,8 @@ def compile_index_template(version_numbers):
 
 def commit_and_push():
     """Commits changes and pushes the repo"""
-    subprocess.check_output(['git', 'commit', '-am', 'script update'])
+    subprocess.check_output(['git', 'add', '--all'])
+    subprocess.check_output(['git', 'commit', '-m', 'script update'])
     subprocess.check_output(['git', 'push'])
     subprocess.check_output(
         ['git', 'subtree', 'push', '--prefix', 'dist', 'origin', 'gh-pages'])
