@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <title>pylint-shortcodes | wizardsoftheweb</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/jq-3.2.1/dt-1.10.16/datatables.min.css" />
+    <style type="text/css">
+        .tbody :nth-child(even) {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <article class="container">
+            <header class="row">
+                <h1 class="col-md-12"><code>pylint-shortcodes</code></h1>
+                <p class="col-md-12">I got really tired of constantly Googling <code>pylint</code> codes. <code>pylint --list-msgs | grep</code> wasn't much faster. All I wanted to do was find a quick, easily searchable reference with all the error codes and their more descriptive names.</p>
+                <p class="col-md-12">Using the modules for <code>virtualenv</code> and <code>pip</code>, I programmatically installed every possible version of <code>pylint</code>. I then ran <code>pylint --list-msgs</code> and parsed the output, sending it to templates via <code>jinja2</code>. The pages are formatted via BootStrap, jQuery, and DataTables. I included a link to PyLint Messages, the website I used the most trying to find a quick reference.</p>
+                <p class="col-md-12">I slapped this together in a couple of hours. Calling the source a train wreck is an insult to trains everywhere. I might touch this later, but I might not. There's probably a better way to do this natively in Python, and there's most definitely a more elegant way to do it.</p>
+                <p class="col-md-12">Useful links:</p>
+                <div class="col-md-12">
+                    <ul>
+                        <li><a target="_blank" href="https://github.com/pypa/virtualenv"><code>virtualenv</code></a></li>
+                        <li><a target="_blank" href="https://github.com/pypa/pip"><code>pip</code></a></li>
+                        <li><a target="_blank" href="https://github.com/pallets/jinja"><code>jinja2</code></a></li>
+                        <li><a target="_blank" href="https://github.com/twbs/bootstrap">BootStrap</a></li>
+                        <li><a target="_blank" href="https://github.com/jquery/jquery">jQuery</a></li>
+                        <li><a target="_blank" href="https://github.com/DataTables/DataTables">DataTables</a></li>
+                        <li><a target="_blank" href="https://pylint-messages.wikidot.com/start">PyLint Messages</a></li>
+                    </ul>
+                </div>
+            </header>
+            <section class="row">
+                <table class="col-md-12 table-hover display" id="full-table">
+                    {% for placement in ['thead', 'tfoot'] %}
+                    <{{ placement }}>
+                        <tr>
+                            <th>Link</th>
+                            <th>Major</th>
+                            <th>Minor</th>
+                            <th>Patch</th>
+                        </tr>
+                    </{{ placement }}>
+                    {% endfor %}
+                    <tbody>
+                        {% for version in version_numbers %}
+                        <tr>
+                            <td>
+                                <a target="_blank" href="https://wizardsoftheweb.github.io/pylint-shortcodes/versions/{{ version|replace('.', '_') }}.html">v{{ version }}
+                                </a>
+                            </td>
+                            {% for semver_chunk in version.split('.') %}
+                            <td>{{ semver_chunk }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </article>
+    </main>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#full-table').dataTable({
+            "pageLength": {{ version_numbers|length|int + 1 }}
+        });
+    })
+
+    </script>
+</body>
+
+</html>
