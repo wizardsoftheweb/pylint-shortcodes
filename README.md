@@ -14,9 +14,9 @@ I slapped this together in a couple of hours. Calling the source a train wreck i
 
 ## Useful links
 
-    * [`virtualenv`](https://github.com/pypa/virtualenv)
-    * [`pip`](https://github.com/pypa/pip)
-    * [`jinja2`](https://github.com/pallets/jinja)
-    * [jQuery](https://github.com/jquery/jquery)
-    * [DataTables](https://github.com/DataTables/DataTables)
-    * [PyLint Messages](https://pylint-messages.wikidot.com/start)
+* [`virtualenv`](https://github.com/pypa/virtualenv)
+* [`pip`](https://github.com/pypa/pip)
+* [`jinja2`](https://github.com/pallets/jinja)
+* [jQuery](https://github.com/jquery/jquery)
+* [DataTables](https://github.com/DataTables/DataTables)
+* [PyLint Messages](https://pylint-messages.wikidot.com/start)
